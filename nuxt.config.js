@@ -47,7 +47,7 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: "#00bcd4",
+          primary: "#fb3b11",
           secondary: "#8bc34a",
           accent: "#3f51b5",
           error: "#e91e63",
