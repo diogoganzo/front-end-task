@@ -5,11 +5,6 @@
         <h1>Rules - View All</h1>
       </v-col>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <h2 class="text-center">Welcome to Search and Stay</h2>
-      </v-col>
-    </v-row>
     <v-data-table
       :headers="headers"
       :items="rules"
@@ -50,8 +45,14 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2"> mdi-pencil </v-icon>
+        <v-icon small class="mr-2" @click="$router.push(`${item.id}`)"> mdi-pencil </v-icon>
         <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      </template>
+      <template v-slot:item.active="{ item }">
+        <v-simple-checkbox
+          v-model="item.active"
+          disabled
+        ></v-simple-checkbox>
       </template>
     </v-data-table>
   </v-col>
@@ -102,8 +103,8 @@ export default {
       this.dialogDelete = true;
     },
 
-    deleteItemConfirm() {
-      this.$store.dispatch("deleteRule", this.deleteRule.id);
+    async deleteItemConfirm() {
+      await this.$store.dispatch("deleteRule", this.deleteRule.id);
       this.closeDelete();
       this.getDataFromApi();
     },

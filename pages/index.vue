@@ -20,6 +20,10 @@
 
 <script>
 export default {
-  name: 'InspirePage'
+  name: 'InspirePage',
+  created() {
+    this.$router.push('/rules/viewall')
+  },
 }
+
 </script>
