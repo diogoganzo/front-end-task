@@ -24,7 +24,6 @@
               </v-list-item>
             </v-list-item-group>
           </v-list>
-          {{ selectedItem }}
         </v-navigation-drawer>
         <v-list style="padding-top: 0px;" class="px-2">
           <h2> {{ items[selectedItem].title }} </h2>
@@ -72,7 +71,7 @@ export default {
   data() {
     return {
       clipped: true,
-      selectedItem: 1,
+      selectedItem: 0,
       items: [
         {
           icon: "mdi-list-status",
@@ -82,18 +81,23 @@ export default {
             {
               title: "View All",
               to: "/rules/viewall",
-              icon: "mdi-plus",
             },
             {
               title: "Create New",
               to: "/rules/viewall",
+              to: "/rules/new",
             },
           ],
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
+          icon: "mdi-account",
+          title: "About me",
+          options: [
+            {
+              title: "Resume",
+              to: "/aboutme",
+            },
+          ],
         },
       ],
       rightDrawer: false,

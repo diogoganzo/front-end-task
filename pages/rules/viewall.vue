@@ -30,16 +30,7 @@
               <v-card-title class="text-h5"
                 >Are you sure you want to delete this item?</v-card-title
               >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="primary" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
+                <card-actions @submit="deleteItemConfirm" @cancel="closeDelete"> </card-actions>
             </v-card>
           </v-dialog>
         </v-toolbar>
@@ -50,8 +41,10 @@
       </template>
       <template v-slot:item.active="{ item }">
         <v-simple-checkbox
-          v-model="item.active"
+          v-model="!!item.active"
           disabled
+          v-bind:true-value="1"
+          v-bind:false-value="0"
         ></v-simple-checkbox>
       </template>
     </v-data-table>

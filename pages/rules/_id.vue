@@ -8,7 +8,6 @@
     <div v-if="rule.id || !editing || loading">
       <v-skeleton-loader
         v-if="loading"
-        v-bind="attrs"
         type="article, actions"
       ></v-skeleton-loader>
       <v-form v-else ref="form" v-model="valid" lazy-validation>
@@ -32,18 +31,8 @@
           v-bind:false-value="0"
           label="Active"
         ></v-checkbox>
-        <v-row justify="center">
-          <v-btn class="mr-4" to="viewall"> Cancel </v-btn>
-
-          <v-btn
-            :disabled="!valid"
-            @click="submit()"
-            color="primary"
-            class="mr-4"
-          >
-            Confirm
-          </v-btn>
-        </v-row>
+        <card-actions @submit="submit()" @cancel="$router.push('/rules/viewall')" :disabled="!valid">
+        </card-actions>
       </v-form>
     </div>
     <div v-else>
@@ -54,7 +43,9 @@
   </v-col>
 </template>
 <script>
+import cardActions from '../../components/cardActions.vue';
 export default {
+  components: { cardActions },
   name: "IndexPage",
   data: () => ({
     rule: { active: true },
@@ -63,7 +54,7 @@ export default {
     editing: false,
     nameRules: [
       (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      (v) => (v && v.length <= 10) || "Name must be less than 50 characters",
     ],
   }),
   methods: {
